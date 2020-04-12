@@ -74,9 +74,9 @@ expose_php=Off
 session_save_path='/var/lib/php/sessions'
 
 # Install Apache and PHP packages
-apt-get install -y libapache2-mod-php libapache2-mod-php7.0 apache2 apache2-utils php7.0-cli php-pear php7.0-mysql php7.0-gd php7.0-dev php7.0-curl php7.0-mcrypt php7.0-opcache
+apt-get install -y libapache2-mod-php libapache2-mod-php7.2 apache2 apache2-utils php7.2-cli php-pear php7.2-mysql php7.2-gd php7.2-dev php7.2-curl php7.2-mcrypt php7.2-opcache
 /usr/bin/a2dismod mpm_event
-/usr/sbin/a2enmod access_compat alias auth_basic authn_core authn_file authz_core authz_groupfile authz_host authz_user autoindex deflate dir env filter mime mpm_prefork negotiation rewrite setenvif socache_shmcb ssl status php7.0 mpm_prefork
+/usr/sbin/a2enmod access_compat alias auth_basic authn_core authn_file authz_core authz_groupfile authz_host authz_user autoindex deflate dir env filter mime mpm_prefork negotiation rewrite setenvif socache_shmcb ssl status php7.2 mpm_prefork
 /usr/sbin/phpenmod mcrypt opcache
 
 # Copy over templates
@@ -90,7 +90,7 @@ cp ../templates/ubuntu1604/apache/ports.conf.template /etc/apache2/ports.conf
 cp ../templates/ubuntu1604/apache/mpm_prefork.conf.template  /etc/apache2/mods-available/mpm_prefork.conf
 cp ../templates/ubuntu1604/apache/ssl.conf.template  /etc/apache2/mods-available/ssl.conf
 cp ../templates/ubuntu1604/apache/status.conf.template  /etc/apache2/mods-available/status.conf
-cp ../templates/ubuntu1604/php/php.ini.template /etc/php/7.0/apache2/php.ini
+cp ../templates/ubuntu1604/php/php.ini.template /etc/php/7.2/apache2/php.ini
 
 # Setup Apache variables
 sed -i "s/\$timeout/$timeout/g" /etc/apache2/apache2.conf
@@ -106,15 +106,15 @@ sed -i "s/\$prefork_max_requests_per_child/$prefork_max_requests_per_child/g" /e
 sed -i "s/\$prefork_listen_backlog/$prefork_listen_backlog/g" /etc/apache2/mods-available/mpm_prefork.conf
 
 # Setup PHP variables
-sed -i "s/\$memory_limit/$memory_limit/g" /etc/php/7.0/apache2/php.ini
-sed -i "s/\$short_open_tag/$short_open_tag/g" /etc/php/7.0/apache2/php.ini
-sed -i "s/\$expose_php/$expose_php/g" /etc/php/7.0/apache2/php.ini
-sed -i "s/\$max_execution_time/$max_execution_time/g" /etc/php/7.0/apache2/php.ini
-sed -i "s/\$error_reporting/$error_reporting/g" /etc/php/7.0/apache2/php.ini
-sed -i "s/\$register_globals/$register_globals/g" /etc/php/7.0/apache2/php.ini
-sed -i "s/\$post_max_size/$post_max_size/g" /etc/php/7.0/apache2/php.ini
-sed -i "s/\$upload_max_filesize/$upload_max_filesize/g" /etc/php/7.0/apache2/php.ini
-sed -i "s@\$session_save_path@$session_save_path@g" /etc/php/7.0/apache2/php.ini
+sed -i "s/\$memory_limit/$memory_limit/g" /etc/php/7.2/apache2/php.ini
+sed -i "s/\$short_open_tag/$short_open_tag/g" /etc/php/7.2/apache2/php.ini
+sed -i "s/\$expose_php/$expose_php/g" /etc/php/7.2/apache2/php.ini
+sed -i "s/\$max_execution_time/$max_execution_time/g" /etc/php/7.2/apache2/php.ini
+sed -i "s/\$error_reporting/$error_reporting/g" /etc/php/7.2/apache2/php.ini
+sed -i "s/\$register_globals/$register_globals/g" /etc/php/7.2/apache2/php.ini
+sed -i "s/\$post_max_size/$post_max_size/g" /etc/php/7.2/apache2/php.ini
+sed -i "s/\$upload_max_filesize/$upload_max_filesize/g" /etc/php/7.2/apache2/php.ini
+sed -i "s@\$session_save_path@$session_save_path@g" /etc/php/7.2/apache2/php.ini
 
 # Secure /server-status behind htaccess
 srvstatus_htuser=serverinfo
